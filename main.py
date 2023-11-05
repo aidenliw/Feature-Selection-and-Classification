@@ -41,8 +41,11 @@ Plot.plotErrors(meanSquareError, classificationError, accuracyList, num_features
 
 # By reviewing above plots, removing 2 dimensions is the best decision
 dim_remove = 2
-true_labels, pred_labels, accuracy = PCA.PCA(training_data, training_labels, testing_data, testing_labels, dim_remove, cls1.applyClassification)
+true_labels, pred_labels, accuracy, train_time, test_time \
+    = PCA.PCA(training_data, training_labels, testing_data, testing_labels, dim_remove, cls1.applyClassification)
 print(" > Accuracy: %.2f%%" % (accuracy*100))
+print(" > Computational Times for training data is %0.2f milliseconds." % (train_time * 1000))
+print(" > Computational Times for testing data is %0.2f milliseconds." % (test_time * 1000))
 
 # Calculate the confusion matrix
 print(" > Confusion Matrix:")
@@ -68,8 +71,11 @@ Plot.plotErrors(meanSquareError, classificationError, accuracyList, num_features
 
 # By reviewing above plots, removing 2 dimensions is the best decision
 dim_remove = 2
-true_labels, pred_labels, accuracy = PCA.PCA(training_data, training_labels, testing_data, testing_labels, dim_remove, cls2.applyClassification)
+true_labels, pred_labels, accuracy, train_time, test_time \
+    = PCA.PCA(training_data, training_labels, testing_data, testing_labels, dim_remove, cls2.applyClassification)
 print(" > Accuracy: %.2f%%" % (accuracy*100))
+print(" > Computational Times for training data is %0.2f milliseconds." % (train_time * 1000))
+print(" > Computational Times for testing data is %0.2f milliseconds." % (test_time * 1000))
 
 # Calculate the confusion matrix by using sklearn
 print(" > Confusion Matrix:")
@@ -94,8 +100,11 @@ Plot.plotErrors2(classificationError, accuracyList, num_features,
            'Backward Search using Naive Bayes')
 
 # By reviewing above plots, removing 5 dimensions is the best decision
-true_labels1, pred_labels1, accuracy = FeatureSelection.backwardSearch(training_data, training_labels, testing_data, testing_labels, indexsToRemove1[0:5], cls1.applyClassification)
+true_labels1, pred_labels1, accuracy, train_time, test_time \
+    = FeatureSelection.backwardSearch(training_data, training_labels, testing_data, testing_labels, indexsToRemove1[0:5], cls1.applyClassification)
 print(" > Accuracy: %.2f%%" % (accuracy*100))
+print(" > Computational Times for training data is %0.2f milliseconds." % (train_time * 1000))
+print(" > Computational Times for testing data is %0.2f milliseconds." % (test_time * 1000))
 
 # Calculate the confusion matrix by using sklearn
 print(" > Confusion Matrix:")
@@ -119,8 +128,11 @@ Plot.plotErrors2(classificationError, accuracyList, num_features,
            'Backward Search using Logistic Regression')
 
 # By reviewing above plots, removing 5 dimensions is the best decision
-true_labels2, pred_labels2, accuracy = FeatureSelection.backwardSearch(training_data, training_labels, testing_data, testing_labels, indexsToRemove2[0:5], cls2.applyClassification)
+true_labels2, pred_labels2, accuracy, train_time, test_time \
+    = FeatureSelection.backwardSearch(training_data, training_labels, testing_data, testing_labels, indexsToRemove2[0:5], cls2.applyClassification)
 print(" > Accuracy: %.2f%%" % (accuracy*100))
+print(" > Computational Times for training data is %0.2f milliseconds." % (train_time * 1000))
+print(" > Computational Times for testing data is %0.2f milliseconds." % (test_time * 1000))
 
 # Calculate the confusion matrix by using sklearn
 print(" > Confusion Matrix:")
