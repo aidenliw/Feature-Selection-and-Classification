@@ -139,5 +139,3 @@ print(" > Confusion Matrix:")
 cm2 = confusion_matrix(true_labels2, pred_labels2)
 Plot.plotConfusionMatrix(cm2, data_class)
 Plot.calculateConfusionMatrixValue(cm2, data_class)
-
-# Sync Test
