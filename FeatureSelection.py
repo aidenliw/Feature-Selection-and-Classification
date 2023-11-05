@@ -11,7 +11,7 @@ class FeatureSelection:
         train_label = np.transpose(train_label)[0]
         test_label = np.transpose(test_label)[0]
         # Train and test the whole data, store the classification error into list
-        prediction = classifier(train_data, test_data, train_label)
+        prediction, _, _ = classifier(train_data, test_data, train_label)
 
         error = sum(prediction != test_label)
         classificationError[0] = error
@@ -32,7 +32,7 @@ class FeatureSelection:
                 train_reduced = np.delete(train_data, i, 1)
                 test_reduced = np.delete(test_data, i, 1)
                 # Classify the training data using currently selected features
-                prediction = classifier(train_reduced, test_reduced, train_label)
+                prediction, _, _ = classifier(train_reduced, test_reduced, train_label)
                 error = sum(prediction != test_label)
                 # Check whether the dataset of this batch has the minimum error value
                 if error < classificationError[iteration]:
@@ -58,9 +58,9 @@ class FeatureSelection:
         for index in indexsToRemove:
             train_data = np.delete(train_data, index, 1)
             test_data = np.delete(test_data, index, 1)
-            
+
         # Train and test the whole data, store the classification error into list
-        prediction = classifier(train_data, test_data, train_label)
+        prediction, train_time, test_time = classifier(train_data, test_data, train_label)
         error = sum(prediction != test_label)
         accuracy = 1 - error/len(test_label)
-        return test_label, prediction, accuracy
+        return test_label, prediction, accuracy, train_time, test_time

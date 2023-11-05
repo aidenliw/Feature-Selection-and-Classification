@@ -50,7 +50,7 @@ class PCA:
             meanSquareError[dimension-numDims] = sum(sum((XReconstructed - Xmc)**2))/len(XReconstructed)
 
             # Apply classification algorithm
-            prediction = classifier(train_reduced, test_reduced, train_label)
+            prediction, _, _ = classifier(train_reduced, test_reduced, train_label)
             # Determine the classification error
             errors = sum(prediction != test_label)
             accuracy = 1 - errors/len(test_label)
@@ -83,7 +83,7 @@ class PCA:
         test_label = np.transpose(test_label)[0]
 
         # Apply classification algorithm
-        prediction = classifier(train_reduced, test_reduced, train_label)
+        prediction, train_time, test_time = classifier(train_reduced, test_reduced, train_label)
         error = sum(prediction != test_label)
         accuracy = 1 - error/len(test_label)
-        return test_label, prediction, accuracy
+        return test_label, prediction, accuracy, train_time, test_time
