@@ -50,27 +50,16 @@ class FeatureSelection:
     
     # After a best dimension value is found, apply Backward Search again to calculate the prediction value
     def backwardSearch(train_data: np.ndarray, train_label: np.ndarray, test_data: np.ndarray, test_label: np.ndarray, indexsToRemove: list, classifier):
-
-        dimension = len(train_data[0])
-        # Store the Classification errors
-        classificationError = 10000*np.ones(dimension)
         # Format the class label array from vector column (n*1) to a single row list (1*n) 
         train_label = np.transpose(train_label)[0]
         test_label = np.transpose(test_label)[0]
-        # Train and test the whole data, store the classification error into list
-        prediction = classifier(train_data, test_data, train_label)
-
-        error = sum(prediction != test_label)
-        classificationError[0] = error
-        accuracyList = np.zeros(dimension,)
-        accuracy = 1 - error/len(test_label)
-        accuracyList[0] = accuracy
-
+        
         # Iterate the indexs that needed to be removed
         for index in indexsToRemove:
             train_data = np.delete(train_data, index, 1)
             test_data = np.delete(test_data, index, 1)
-
+            
+        # Train and test the whole data, store the classification error into list
         prediction = classifier(train_data, test_data, train_label)
         error = sum(prediction != test_label)
         accuracy = 1 - error/len(test_label)
